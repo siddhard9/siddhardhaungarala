@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siddhardh Ungarala's Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js"></script>
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #467C82;
+            --dark-primary: #2F5155;
+            --bg-color: #E6F0F3;
+            --secondary-bg: #93B0B5;
+            --text-color: #002623;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        .navbar {
+            background-color: var(--secondary-bg);
+            padding: 10px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            font-weight: bold;
+            color: var(--text-color);
+        }
+
+        .navbar-brand:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-link {
+            font-size: clamp(0.9rem, 2.5vw, 1rem);
+            color: var(--text-color);
+            margin-left: 15px;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 8px;
+        }
+
+        .navbar-toggler:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon,
+        .fa-times {
+            font-size: 1.2rem;
+            transition: opacity 0.3s ease;
+        }
+
+        @media (min-width: 992px) {
+            .navbar-toggler {
+                display: none;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-toggler.collapsed .navbar-toggler-icon {
+                display: inline-block;
+            }
+
+            .navbar-toggler.collapsed .fa-times {
+                display: none;
+            }
+        }
+
+        .navbar-toggler:not(.collapsed) .navbar-toggler-icon {
+            display: none;
+        }
+
+        .navbar-toggler:not(.collapsed) .fa-times {
+            display: inline-block;
+            color: var(--text-color);
+        }
+
+        @media (min-width: 992px) {
+            .navbar-nav {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .nav-item {
+                margin-left: 15px;
+            }
+
+            .navbar-collapse {
+                display: flex !important;
+                flex-basis: auto;
+            }
+        }
+
+        .section {
+            padding: clamp(30px, 6vw, 50px) 0;
+            background-color: var(--bg-color);
+            margin-bottom: 50px;
+        }
+
+        .section.bg-light {
+            background-color: var(--secondary-bg);
+        }
+
+        .card {
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .card-body {
+            padding: 12px;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+            flex-grow: 1;
+        }
+
+        #internships .card,
+        #education .education-card {
+            height: auto;
+            display: block;
+        }
+
+        #internships .card-body,
+        #education .education-card {
+            padding: 12px;
+        }
+
+        #education .education-card {
+            margin-bottom: 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: var(--secondary-bg);
+            border-radius: 8px;
+        }
+
+        .contact-form-container {
+            background-color: var(--secondary-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            margin: 50px auto;
+            max-width: 550px;
+            position: relative;
+            border: 2px solid var(--primary-color);
+        }
+
+        .contact-form .form-control {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            border: 1px solid var(--primary-color);
+            border-radius: 5px;
+            padding: 10px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 5px rgba(70, 124, 130, 0.5);
+            outline: none;
+        }
+
+        .contact-form .form-label {
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+            font-weight: 500;
+            color: var(--text-color);
+        }
+
+        .contact-form .btn {
+            padding: 10px 20px;
+            font-size: clamp(0.85rem, 2.5vw, 1rem);
+            border-radius: 5px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            min-width: 100px;
+        }
+
+        .contact-form .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .contact-form .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .contact-form .btn-secondary {
+            background-color: #002623;
+            border-color: #002623;
+            margin-left: 8px;
+        }
+
+        .contact-form .alert {
+            margin-top: 10px;
+            font-size: clamp(0.8rem, 2.5vw, 0.9rem);
+            border-radius: 5px;
+        }
+
+        .project-img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .skills-bar {
+            background-color: var(--bg-color);
+            height: 18px;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+
+        .skills-bar-fill {
+            background-color: var(--primary-color);
+            height: 100%;
+            width: 0;
+            transition: width 1.5s ease-in-out;
+        }
+
+        .skills-bar-fill.animate {
+            width: var(--skill-width);
+        }
+
+        #hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: var(--secondary-bg);
+            position: relative;
+        }
+
+        #main-content {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        #main-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        h2 {
+            font-weight: bold;
+            font-size: clamp(1.8rem, 4.5vw, 2.2rem);
+            color: var(--dark-primary);
+        }
+
+        #name {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+        }
+
+        #name::after {
+            content: '|';
+            position: absolute;
+            right: -15px;
+            animation: blink 0.7s infinite;
+            opacity: 1;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        .typing {
+            overflow: hidden;
+            white-space: nowrap;
+            display: inline-block;
+            animation: typing 5s steps(30, end) forwards;
+        }
+
+        .code-symbol {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin: 15px 0;
+            color: var(--primary-color);
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 25px;
+            opacity: 1;
+            visibility: visible;
+            transition: opacity 0.5s ease;
+        }
+
+        .section-heading i {
+            font-size: clamp(1.8rem, 4.5vw, 2.2rem);
+            color: var(--dark-primary);
+        }
+
+        .about-block {
+            background-color: var(--secondary-bg);
+            padding: 18px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-block .social-links a {
+            color: var(--text-color);
+            margin: 0 10px;
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .about-block .social-links a:hover {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        footer {
+            background-color: var(--secondary-bg);
+            color: var(--text-color);
+            padding: 25px 0;
+            text-align: center;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 5px 0;
+            font-size: clamp(0.85rem, 2.5vw, 0.95rem);
+        }
+
+        footer .social-links a {
+            color: var(--text-color);
+            margin: 0 12px;
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        footer .social-links a:hover {
+            color: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-nav {
+                text-align: center;
+                padding: 15px 0;
+            }
+
+            .nav-link {
+                margin: 8px 0;
+            }
+
+            .navbar-toggler {
+                display: inline-block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 25px 0;
+                margin-bottom: 40px;
+            }
+
+            .contact-form-container {
+                padding: 15px;
+                margin: 40px 10px;
+            }
+
+            .contact-form .btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            .contact-form .btn-secondary {
+                margin-left: 0;
+            }
+
+            .project-img {
+                height: 120px;
+            }
+
+            .card-body {
+                padding: 10px;
+            }
+
+            footer {
+                padding: 20px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            #hero {
+                padding: 15px;
+            }
+
+            #name {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .code-symbol {
+                font-size: clamp(1.2rem, 5vw, 1.5rem);
+            }
+
+            .contact-form .form-control {
+                padding: 8px;
+            }
+
+            .contact-form .form-label {
+                font-size: 0.85rem;
+            }
+
+            footer .social-links a,
+            .about-block .social-links a {
+                font-size: 1.1rem;
+                margin: 0 8px;
+            }
+
+            h2 {
+                font-size: clamp(1.5rem, 4vw, 1.8rem);
+            }
+
+            .section-heading i {
+                font-size: clamp(1.5rem, 4vw, 1.8rem);
+            }
+
+            .navbar-toggler-icon,
+            .fa-times {
+                font-size: 1rem;
+            }
+        }
+
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            padding: 10px 0;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 10px;
+            }
+
+            .gallery-img {
+               
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-img {
+                height: 180px;
+            }
+        }
+    </style>
+    <!-- CSS to add to your existing <style> block -->
+</head>
+
+<body>
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="code-symbol">
+            </>
+        </div>
+        <h1 id="name" class="typing">&lt/&gt;Siddhardh Ungarala</h1>
+        <p data-aos="fade-up" data-aos-delay="200">AI/ML & Cybersecurity Enthusiast | Web Developer</p>
+    </section>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">Siddhardh Ungarala</a>
+                <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#achievements">Achievements</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#certifications">Certifications</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#internships">Internships</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container" data-aos="fade-up">
+                <div class="section-heading">
+                    <i class="fas fa-user"></i>
+                    <h2>About Me</h2>
+                </div>
+                <div class="about-block">
+                    <p>Hello! I'm Ungarala Siddhardha Lakshmi Balaji Naidu, a dedicated B.Tech student specializing in
+                        Artificial Intelligence and Machine Learning, with a strong foundation in web development and a
+                        growing interest in cybersecurity. I'm passionate about exploring AI advancements, deep learning
+                        frameworks like PyTorch and Keras, and their real-world applications. My experience includes
+                        developing responsive web applications, participating in AI/ML and cybersecurity workshops, and
+                        contributing to innovative projects. I'm seeking an internship opportunity to gain hands-on
+                        research experience and apply my technical skills in a professional, innovation-driven
+                        environment.</p>
+                    <p><strong>Contact:</strong> siddhardhalucky4@gmail.com | +91 91211999499 | Andhra Pradesh, India
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/siddharadh-ungarala" target="_blank"><i
+                                class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/siddhard9" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section bg-light">
+            <div class="container" data-aos="fade-up">
+                <div class="section-heading">
+                    <i class="fas fa-code"></i>
+                    <h2>Technical Skills</h2>
+                </div>
+                <div>
+                    <p>Python</p>
+                    <div class="skills-bar">
+                        <div class="skills-bar-fill" style="--skill-width: 90%;"></div>
+                    </div>
+                    <p>Web Development (HTML, CSS, JavaScript)</p>
+                    <div class="skills-bar">
+                        <div class="skills-bar-fill" style="--skill-width: 85%;"></div>
+                    </div>
+                    <p>SQL & Databases (MySQL, Firebase, MongoDB)</p>
+                    <div class="skills-bar">
+                        <div class="skills-bar-fill" style="--skill-width: 70%;"></div>
+                    </div>
+                    <p>C/C++</p>
+                    <div class="skills-bar">
+                        <div class="skills-bar-fill" style="--skill-width: 60%;"></div>
+                    </div>
+                    <p>Java</p>
+                    <div class="skills-bar">
+                        <div class="skills-bar-fill" style="--skill-width: 65%;"></div>
+                    </div>
+                    <p>Machine Learning</p>
+                    <div class="skills-bar">
+                        <div class="skills-bar-fill" style="--skill-width: 80%;"></div>
+                    </div>
+                    <p>Cybersecurity</p>
+                    <div class="skills-bar">
+                        <div class="skills-bar-fill" style="--skill-width: 75%;"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="section">
+            <div class="container" data-aos="fade-up">
+                <div class="section-heading">
+                    <i class="fas fa-trophy"></i>
+                    <h2>Achievements</h2>
+                </div>
+                <ul>
+                    <li>Secured 1st Place in National AI/ML Hackathon 2024, developing an innovative anomaly detection
+                        model for cybersecurity applications.</li>
+                    <li>Actively contributed to 5+ AI/ML workshops at prestigious institutions like IISc Bangalore,
+                        enhancing expertise in deep learning frameworks.</li>
+                    <li>Recognized as Top Performer in Cybersecurity Seminar at JNTU-GV, demonstrating proficiency in
+                        network security protocols.</li>
+                    <li>Developed a high-impact e-commerce platform during internship at AK-Technologies Pvt. Ltd.,
+                        improving user engagement by 30%.</li>
+                    <li>Completed 4-month Advanced Python Course with distinction, mastering data analysis and machine
+                        learning libraries like Pandas and Scikit-learn.</li>
+                    <li>Participated in 3D Printing Workshop, gaining hands-on experience in integrating IoT with
+                        AI-driven design solutions.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section bg-light">
+            <div class="container" data-aos="fade-up">
+                <div class="section-heading">
+                    <i class="fas fa-project-diagram"></i>
+                    <h2>Projects</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card">
+                            <img src="img/Screenshot 2025-05-06 152929.png" class="project-img"
+                                alt="E-commerce Website">
+                            <div class="card-body">
+                                <h5 class="card-title">E-commerce Website for AK-Technologies Pvt. Ltd.</h5>
+                                <p class="card-text">Designed and developed a fully responsive e-commerce website using
+                                    HTML, CSS, JavaScript, AJAX, and Firebase for backend support and authentication. <a
+                                        href="https://ak-tag.web.app/" target="_blank">View Project</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card">
+                            <img src="img/exam_cell.png" class="project-img" alt="Exam Cell Management System">
+                            <div class="card-body">
+                                <h5 class="card-title">Exam Cell Management System</h5>
+                                <p class="card-text">Implemented a responsive UI using Bootstrap, with AJAX for
+                                    asynchronous data handling. Integrated PHP and MySQL for exam schedules, results,
+                                    and admin controls.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card">
+                            <img src="img/images.jpeg" class="project-img" alt="Avoir">
+                            <div class="card-body">
+                                <h5 class="card-title">Avoir (Student Web Platform)</h5>
+                                <p class="card-text">Built a student-focused web application using HTML, CSS,
+                                    JavaScript, MySQLi, jQuery, AJAX, and Bootstrap to provide college-related services.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section id="certifications" class="section">
+            <div class="container" data-aos="fade-up">
+                <div class="section-heading">
+                    <i class="fas fa-certificate"></i>
+                    <h2>Certifications</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">2-Day Offline Workshop on AI/ML</h5>
+                                <p class="card-text">IISc Bangalore</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">6-Day Offline Workshop on AWS</h5>
+                                <p class="card-text">Aditya College (ACET)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">2-Day Offline Cybersecurity Workshop</h5>
+                                <p class="card-text">JNTU-GV</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-6 mb-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">4-Month Advanced Python Course</h5>
+                                <p class="card-text">Techin IT</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="section bg-light">
+            <div class="container" data-aos="fade-up">
+                <div class="section-heading">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h2>Education</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="education-card">
+                            <h5>B.Tech in Artificial Intelligence and Machine Learning</h5>
+                            <p>Aditya College (ACET) | 2024 - Present | 8.80 CGPA</p>
+                        </div>
+                        <div class="education-card">
+                            <h5>Diploma in Communication and Computer Networking</h5>
+                            <p>Aditya College (ACET) | 2021 - 2024 | 89.6%</p>
+                        </div>
+                        <div class="education-card">
+                            <h5>SSC (10th)</h5>
+                            <p>Pratibha Vidyaniketan | 2020-21 | 9.3 CGPA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Internships Section -->
+        <section id="internships" class="section">
+            <div class="container" data-aos="fade-up">
+                <div class="section-heading">
+                    <i class="fas fa-briefcase"></i>
+                    <h2>Internships</h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Web Development Intern at AK-Technologies Pvt. Ltd.</h5>
+                                <p class="card-text">March 2024 - June 2024</p>
+                                <p class="card-text">Led the design and development of a responsive e-commerce website
+                                    using HTML, CSS, JavaScript, AJAX, and Firebase. Implemented secure user
+                                    authentication and real-time database integration, boosting user engagement by 30%.
+                                    Collaborated with a team of 5 developers to optimize performance and ensure
+                                    cross-browser compatibility.</p>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Advanced Python Internship at Techin IT</h5>
+                                <p class="card-text">January 2024 - April 2024</p>
+                                <p class="card-text">Developed Python applications for data analysis and machine
+                                    learning. Built a predictive model using Scikit-learn and Pandas, achieving 85%
+                                    accuracy. Automated data pipelines, reducing manual effort by 40%. Gained expertise
+                                    in NumPy, Matplotlib, and Flask for web-based visualization.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+
+
+        <!-- Contact Section -->
+        <section id="contact" class="section bg-light">
+            <div class="container" data-aos="fade-up">
+                <div class="section-heading">
+                    <i class="fas fa-envelope"></i>
+                    <h2>Contact Me</h2>
+                </div>
+                <div class="contact-form-container">
+                    <div id="contact-message"></div>
+                    <div class="contact-form">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea class="form-control" id="message" rows="4" required></textarea>
+                        </div>
+                        <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
+                            <button type="submit" class="btn btn-primary" id="submit-contact"><i
+                                    class="fas fa-paper-plane me-2"></i>Send</button>
+                            <button class="btn btn-secondary" id="download-resume"><i
+                                    class="fas fa-download me-2"></i>Download Resume</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Gallery Section HTML -->
+        <section id="gallery" class="section bg-light">
+            <div class="container" data-aos="fade-up">
+                <div class="section-heading">
+                    <i class="fas fa-image"></i>
+                    <h2>Gallery</h2>
+                </div>
+                <div class="gallery-grid">
+                    <!-- Replace these with your image URLs -->
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                        <img src="img/gallery/IMG-2.jpg" alt="Gallery Image 1"
+                            class="gallery-img">
+                    </div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                        <img src="img/gallery/IMG_1.jpg" alt="Gallery Image 2"
+                            class="gallery-img">
+                    </div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085" alt="Gallery Image 3"
+                            class="gallery-img">
+                    </div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+                        <img src="img/gallery/IMG_3.jpg" alt="Gallery Image 4"
+                            class="gallery-img">
+                    </div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+                        <img src="img/gallery/IMG_4.jpg" alt="Gallery Image 4"
+                            class="gallery-img">
+                    </div>
+                    <div class="gallery-item" data-aos="fade-up" data-aos-delay="400">
+                        <img src="img/gallery/IMG_6.jpg" alt="Gallery Image 4"
+                            class="gallery-img">
+                    </div>
+                    <!-- Add more gallery-item divs as needed -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <p>developed by @alwayssiddhardh</p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/siddharadh-ungarala" target="_blank"><i
+                        class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/siddhard9" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://x.com/alwayssiddhardh" target="_blank"><i class="fab fa-x-twitter"></i></a>
+                        <a href="https://www.instagram.com/alwayssiddhardh" target="_blank"><i
+                            class="fab fa-instagram"></i></a>
+                            <a href="mailto:alwayssiddhardh@gmail.com"><i class="fas fa-envelope"></i></a>
+                            <a href="https://www.snapchat.com/add/alwayssiddhardh" target="_blank"><i
+                                class="fab fa-snapchat"></i></a>
+                            </div>
+                            <p>Innovating with AI/ML and Web Development</p>
+                <p>Contact: alwayssiddhardh@gmail.com</p>
+                <p class="mt-2">© 2025 Siddhardh Ungarala. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init();
+
+        // Typing Animation and Cursor Blink Control
+        const nameElement = $('#name');
+        nameElement.on('animationend', function () {
+            nameElement.css('width', 'auto');
+            setTimeout(() => {
+                nameElement.css('animation', 'none');
+                nameElement[0].style.setProperty('--webkit-animation', 'none');
+            }, 0);
+        });
+
+        // Skills Bar Animation
+        function animateSkillsBars() {
+            const skillsBars = document.querySelectorAll('.skills-bar-fill');
+            skillsBars.forEach(bar => {
+                bar.classList.add('animate');
+            });
+        }
+
+        // Trigger skills bar animation when section is in view
+        const skillsSection = document.querySelector('#skills');
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) {
+                animateSkillsBars();
+                observer.disconnect();
+            }
+        }, { threshold: 0.5 });
+        observer.observe(skillsSection);
+
+        // Swipe and Scroll Handling
+        let touchStartY = 0;
+        let touchEndY = 0;
+        let hasScrolled = false;
+
+        function showMainContent() {
+            if (!hasScrolled) {
+                $('#main-content').addClass('visible');
+                hasScrolled = true;
+            }
+        }
+
+        $(window).on('scroll', function () {
+            const scrollPosition = $(window).scrollTop();
+            const heroHeight = $('#hero').height();
+            if (scrollPosition > heroHeight * 0.8) {
+                showMainContent();
+            }
+        });
+
+        document.addEventListener('touchstart', function (e) {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        document.addEventListener('touchend', function (e) {
+            touchEndY = e.changedTouches[0].screenY;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeDistance = touchStartY - touchEndY;
+            if (swipeDistance > 50) {
+                showMainContent();
+            }
+        }
+
+        // Smooth Scroll and Close Navbar on Link Click
+        $('a.nav-link').click(function (e) {
+            e.preventDefault();
+            const target = $(this).attr('href');
+            $('html, body').animate({
+                scrollTop: $(target).offset().top - 70
+            }, 1000);
+            if ($('.navbar-toggler').is(':visible')) {
+                $('.navbar-collapse').collapse('hide');
+            }
+        });
+
+        // Initialize EmailJS with retry mechanism
+        function initializeEmailJS() {
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init('n8T_DQNlQ9nZNgBw2');
+                console.log('EmailJS initialized successfully');
+            } else {
+                console.error('EmailJS SDK not loaded. Retrying in 1 second...');
+                setTimeout(initializeEmailJS, 1000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            initializeEmailJS();
+        });
+
+        // Contact Form Submission with EmailJS
+        $('#submit-contact').click(function (e) {
+            e.preventDefault();
+
+            const name = $('#name').val().trim();
+            const email = $('#email').val().trim();
+            const message = $('#message').val().trim();
+
+            if (name && email && message) {
+                if (typeof emailjs !== 'undefined') {
+                    const templateParams = {
+                        from_name: name,
+                        from_email: email,
+                        message: message,
+                        to_email: 'alwayssiddhardh@gmail.com'
+                    };
+
+                    emailjs.send('service_92k36k2', 'template_whu6t7m', templateParams)
+                        .then(function (response) {
+                            $('#contact-message').html('<div class="alert alert-success">Message sent successfully!</div>');
+                            $('.contact-form')[0].reset();
+                            console.log('Email sent successfully:', response);
+                        }, function (error) {
+                            $('#contact-message').html('<div class="alert alert-danger">Failed to send message. Please try again later.</div>');
+                            console.error('EmailJS send error:', error);
+                        });
+                } else {
+                    $('#contact-message').html('<div class="alert alert-danger">Email service is not available. Please try again later or contact me directly.</div>');
+                    console.error('EmailJS is not loaded. Please check the script inclusion.');
+                }
+            } else {
+                $('#contact-message').html('<div class="alert alert-warning">Please fill all fields.</div>');
+            }
+        });
+
+        // Download Resume
+        $('#download-resume').click(function () {
+            const resumeUrl = 'path/to/your/resume.pdf';
+            const link = document.createElement('a');
+            link.href = resumeUrl;
+            link.download = 'Siddhardh_Ungarala_Resume.pdf';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
+</body>
+
+</html>
