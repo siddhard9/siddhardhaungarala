@@ -362,7 +362,7 @@
 
         footer {
             background-color: var(--secondary-bg);
-            color: var(--text-color);
+            color: var(--dark-primary);
             padding: 25px 0;
             text-align: center;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
@@ -887,7 +887,9 @@
         <!-- Footer -->
         <footer>
             <div class="container">
-                <p>developed by @alwayssiddhardh</p>
+                
+                <p class="mt-2">© 2025 Siddhardh Ungarala. All rights reserved.</p>
+                <br>
                 <div class="social-links">
                     <a href="https://www.linkedin.com/in/siddharadh-ungarala" target="_blank"><i
                         class="fab fa-linkedin"></i></a>
@@ -899,9 +901,10 @@
                             <a href="https://www.snapchat.com/add/alwayssiddhardh" target="_blank"><i
                                 class="fab fa-snapchat"></i></a>
                             </div>
-                            <p>Innovating with AI/ML and Web Development</p>
+                            <br>
+                            <p>developed by @alwayssiddhardh</p>
+                            
                 <p>Contact: alwayssiddhardh@gmail.com</p>
-                <p class="mt-2">© 2025 Siddhardh Ungarala. All rights reserved.</p>
             </div>
         </footer>
     </div>
@@ -978,6 +981,7 @@
             }
         }
 
+console.log
         // Smooth Scroll and Close Navbar on Link Click
         $('a.nav-link').click(function (e) {
             e.preventDefault();
@@ -994,7 +998,6 @@
         function initializeEmailJS() {
             if (typeof emailjs !== 'undefined') {
                 emailjs.init('n8T_DQNlQ9nZNgBw2');
-                console.log('EmailJS initialized successfully');
             } else {
                 console.error('EmailJS SDK not loaded. Retrying in 1 second...');
                 setTimeout(initializeEmailJS, 1000);
